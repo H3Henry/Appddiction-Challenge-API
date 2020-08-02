@@ -8,6 +8,8 @@ import com.appddiction.challenge.api.appddiction_challenge_api.repositories.Pers
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +24,11 @@ public class PersonController {
     @GetMapping(value = "/get-all")
     public List<Person> getAllPpl() {
         return pplRepo.findAll();
+    }
+
+    @PostMapping(value = "/save")
+    public Person savePerson(@RequestBody Person p) {
+        
+        return pplRepo.save(p);
     }
 }
