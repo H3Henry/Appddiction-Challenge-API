@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping(value = "person")
 public class PersonController {
 
@@ -34,8 +34,10 @@ public class PersonController {
         return pplRepo.save(p);
     }
 
-    @DeleteMapping(value = "/delete")
-    public void deletePerson(@RequestParam Integer id) {
-        pplRepo.deleteById(id);
+    @PostMapping(value = "/delete")
+    public void deletePerson(@RequestBody String id) {
+        System.out.println(id);
+        int idInt = Integer.parseInt(id);
+        pplRepo.deleteById(idInt);
     }
 }
